@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-
+import React from 'react';
+import { useState, useEffect } from "react";
 import axios from "axios";
-
+// import { warning } from 'react-router/lib/router';
 import { useForm } from "react-hook-form";
+import { response } from 'express';
 
 const TransferProduct = () => {
-  const [props, setProps]=useState(JSON.parse(localStorage.getItem('products')));  
+  const props = JSON.parse(localStorage.getItem('products'));
 
+  const [product, setProduct] = useState([]);
   
   const { handleSubmit, watch, register } = useForm({ mode: "onChange" });
 
@@ -27,25 +29,20 @@ const TransferProduct = () => {
         let parseData = JSON.parse(data.response);
 
 
-        var cost=parseData?.cost;
-        var budget=props.budget;
+        let cost=parseData?.cost;
+        let budget=props.budget;
       
 
 
-        if(cost>budget ){
-          alert("unable to transfer product");
+        if(cost<budget){
+          console.log("insufficient balance");
 
         }
-        
         else{
-         
-
         await axios
           .put("http://localhost:8080/api/TransferProduct/"+formData?.id, userData)
           .then((response) => {
             console.log(response);
-            if (response.status== 200) { alert("SUCCESSFUL!"); }
-            else { alert("FAILURE!"); }
           })
           .catch((error) => {
             if (error.response) {
@@ -57,31 +54,8 @@ const TransferProduct = () => {
               console.log(error);
             }
           });
-          budget=budget-cost;
-          var userUpdate= {
-            gmail:props.email,
-            newbudget:budget
-            
-          };
-          console.log(userUpdate.newbudget);
-      
-              await axios
-              .put("http://localhost:8080/api/updatebudget/"+props.email,userUpdate)
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => {
-                if (error.response) {
-                  console.log(error.response);
-                  console.log("server responded");
-                } else if (error.request) {
-                  console.log("network error");
-                } else {
-                  console.log(error);
-                }
-              });
-        }
 
+        }
 
       };
 

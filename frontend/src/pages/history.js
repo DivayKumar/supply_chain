@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import '../all.css';
 import Axios from "axios";
+import './table.css';
 
 const History = () => {
 	const [products, setProducts] = useState([]);
@@ -23,14 +23,15 @@ const History = () => {
 	const display = () => {
 	
 	  return products?.map(product => (
-		<tr key={product.record.id}>
-		   <th>{product.record.id}</th>
-		   <th>{product.record.name}</th>
-		   <th>{product.record.area}</th>
-		   <th>{product.record.ownerName}</th>
-		   <th>{product.record.cost}</th>
-		   <th>{product.txId}</th>
-		   <th>{product.timestamp}</th>
+		<tr>
+    <td><strong>{product.record.id}</strong></td>
+
+		   <td>{product.record.name}</td>
+		   <td>{product.record.area}</td>
+		   <td>{product.record.ownerName}</td>
+		   <td>{product.record.cost}</td>
+		   {/* <td>{product.txId}</td> */}
+		   <td>{product.timestamp}</td>
 
 		 </tr>
 	   ) );
@@ -43,7 +44,6 @@ const History = () => {
 	
 	  return (
 		
-		<div>
 				 <form  onSubmit={fetchProducts()}>
         <label htmlFor="header-search">
             <span className="visually-hidden">Search blog posts</span>
@@ -58,7 +58,6 @@ const History = () => {
 
         />
         {/* <button type="submit" >Search</button> */}
-    </form>
 	
 	<table>
 	  <thead>
@@ -68,7 +67,7 @@ const History = () => {
 		  <th>Area</th>
 		  <th>Owner Name</th>
 		  <th>Cost</th>
-		  <th>TxID</th>
+		  {/* <th>TxID</th> */}
 		  <th>Time</th>
 
 
@@ -82,8 +81,8 @@ const History = () => {
 	  
 	 
 	</table>
-		</div>
-	  
+	</form>
+
 	  
 	  )
 	}

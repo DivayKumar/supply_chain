@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import '../all.css';
 import Axios from "axios";
+import './table.css';
 
 
 const AllProduct = () => {
@@ -15,24 +15,29 @@ const fetchProducts = async () => {
     );
 
     let parseData = JSON.parse(data.response)
-
     setProducts(parseData);
+   
 
 };
 
 const display = () => {
 
+      
+
   return products?.map(product => (
-    <tr key={product.id}>
-       <th>{product.id}</th>
-       <th>{product.name}</th>
-       <th>{product.area}</th>
-       <th>{product.ownerName}</th>
-       <th>{product.cost}</th>
-     </tr>
+    
+
+    <tr>
+    <td><strong>{product.id}</strong></td>
+    <td> {product.name}</td>
+    <td>{product.area}</td>
+    <td>{product.ownerName}</td>
+    <td>{product.cost}</td>
+  </tr>
    ) );
   
- }
+ 
+}
 useEffect(() => {
   fetchProducts();
 }, []);
@@ -40,9 +45,9 @@ useEffect(() => {
 
   return (
     
-    <div>
+<div >
 
-<table>
+{/* <table>
   <thead>
     <tr>
       <th>ID</th>
@@ -57,8 +62,22 @@ useEffect(() => {
   {display()}
 
   </tbody>
-  
  
+</table> */}
+<table>
+  <thead>
+    <tr>
+    <th>ID</th>
+      <th>Name</th>
+      <th>Area</th>
+      <th>Owner Name</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    {display()}
+
+  </tbody>
 </table>
     </div>
   

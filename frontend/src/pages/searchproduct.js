@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../all.css";
 import Axios from "axios";
+import './table.css';
 
 function SearchProduct() {
   const [products, setProducts] = useState([]);
@@ -11,12 +11,12 @@ function SearchProduct() {
     const { data } = await Axios.get(
       "http://localhost:8080/api/QueryProductById/"+id
     );
-console.log(data.response);
     let parseData = JSON.parse(data.response);
 
     setProducts(parseData);
+    console.log(products.cost);
+
   };
-  console.log(id);
   // useEffect(() => {
   //   fetchProducts();
   // }, []);
@@ -45,22 +45,21 @@ console.log(data.response);
     <table>
 	<thead>
 	  <tr>
-		<th>ID</th>
+		<th>ID  </th>
 		<th>Name</th>
-		<th>Area</th>
-		<th>Owner Name</th>
+		<th>Area  </th>
+		<th>Owner Name    </th>
 		<th>Cost</th>
 	  </tr>
 	</thead>
 	<tbody>
-		<tr key={products.id}>
-		  <th>{products.id}</th>
-		  <th>{products.name}</th>
-		  <th>{products.area}</th>
-		  <th>{products.ownerName}</th>
-		  <th>{products.cost}</th>
-		</tr>
-	  
+  <tr>
+    <td><strong>{products.id}</strong></td>
+    <td> {products.name}</td>
+    <td>{products.area}</td>
+    <td>{products.ownerName}</td>
+    <td>{products.cost}</td>
+  </tr>
 	</tbody>
   </table>
     </div>

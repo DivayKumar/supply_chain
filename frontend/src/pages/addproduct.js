@@ -37,6 +37,8 @@ const AddProduct = () =>  {
 		  .post("http://localhost:8080/api/addproduct/", userData)
 		  .then((response) => {
 			console.log(response);
+			if (response.status== 200) { alert("Product added SUCCESSFUL!"); }
+			else { alert("Unable to add product"); }
 		  })
 		  .catch((error) => {
 			if (error.response) {
@@ -53,7 +55,7 @@ const AddProduct = () =>  {
   
 	return (
 
-
+ 
 
 <form >
 <h3>Add Product</h3>
@@ -79,11 +81,15 @@ const AddProduct = () =>  {
 </div>
 <div className="form-group">
 	<label>Cost</label>
-	<input type="text" name="cost" value={data.cost} className="form-control" placeholder="eg: 100" onChange={handleChange}
+	<input type="number" name="cost" value={data.cost} className="form-control" placeholder="eg: 100" onChange={handleChange}
 />
 </div>
 
-<button type="submit" onClick={handleSubmit} className="btn btn-primary btn-block">submit</button>
+<div className="d-grid">
+        <button type="submit" onClick={handleSubmit} className="btn btn-primary">
+          Submit
+        </button>
+      </div>
 
 
 </form>
